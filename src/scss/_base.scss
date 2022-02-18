@@ -1,0 +1,115 @@
+@use "sass:math";
+@import "./mixins";
+@import "./variables";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+header{
+  height: 60px;
+  background: $green;
+}
+main{
+  @include flex(center,center);
+  height: calc(100vh - 60px);
+  background: $purple;
+}
+.left{
+  @include textCenter;
+  background: lightblue;
+  height: 100%;
+}
+.right{
+  @include textCenter;
+  background: $white;
+  height: 100%;
+}
+footer{
+  height: 60px;
+  background: $orange;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: $fontFamily;
+  color: $txtColor;
+  font-size: $fontSizeNormal;
+  line-height: 1.5;
+  background-color: $bodyBg;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+img {
+  width: 100%;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 math.div($spacing, 2) * -1;
+
+  @include tablet {
+    margin: 0 math.div($mobileSpacing, 2) * -1;
+  }
+}
+
+[class*="col-"] {
+  padding: 0 math.div($spacing, 2);
+
+  @include tablet {
+    padding: 0 math.div($mobileSpacing, 2);
+  }
+}
+
+@for $i from 1 through 12 {
+  $v: math.div($i, 12) * 100;
+  .col-#{$i} {
+    width: $v * 1%;
+  }
+}
+
+// medium screen
+
+@include tablet {
+  @for $i from 1 through 12 {
+    $v: math.div($i, 12) * 100;
+    .col-md-#{$i} {
+      width: $v * 1%;
+    }
+  }
+
+  .hide-md {
+    display: none;
+  }
+}
+
+// small screen
+
+@include mobile {
+  @for $i from 1 through 12 {
+    $v: math.div($i, 12) * 100;
+    .col-sm-#{$i} {
+      width: $v * 1%;
+    }
+  }
+
+  .hide-sm {
+    display: none;
+  }
+}
